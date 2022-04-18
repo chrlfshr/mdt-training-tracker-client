@@ -6,14 +6,14 @@ import Switch_Role from "./components/switch_roles";
 import Backshop from "./components/backshop";
 
 
-export const apiUrl = "http://localhost:3001"
+export const apiUrl = "https://mdt-training-tracker.herokuapp.com"
 
 function App() {
 
   const navigate = useNavigate();
 
-  const [currentUser, setCurrentUser] = useState(
-    {id: undefined,
+  const [currentUser, setCurrentUser] = useState({
+    id: undefined,
     username: "bob",
     rank: '1Lt',
     name: 'bob',
@@ -29,7 +29,6 @@ function App() {
   },[])
   
   useEffect(()=>{
-    console.log(currentUser)
     if(currentUser.id !== undefined){
       navigate("/" + currentUser.username)
       setCurrentRole("operator")

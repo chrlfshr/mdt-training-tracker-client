@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, TextField} from '@mui/material';
+import { Button, TextField, Grid} from '@mui/material';
 import {apiUrl} from '../App.js';
 
 function Sign_In({setUser}) {
@@ -7,7 +7,7 @@ function Sign_In({setUser}) {
 
   const fetchUserData = function(e){
     e.preventDefault();
-    fetch(apiUrl +'/users/account/'+ username)
+    fetch(apiUrl + '/users/account/' + username)
     .then(data => data.json())
     .then(userData => setUser(userData))
     .catch((error) => {
@@ -17,11 +17,13 @@ function Sign_In({setUser}) {
 
   return (
     <div className="sign_in">
+      <Grid alignItems='center' justify='center' marginTop="20em">
      <form onSubmit={fetchUserData}>
-      <TextField type="username" variant="outlined" label="User Name" 
-                 onChange={(e) => setUsername(e.target.value)}/>
-      <Button type='submit' variant="contained">Sign In</Button>
+      <TextField margin="normal" type="username" variant="outlined" label="User Name" 
+                 onChange={(e) => setUsername(e.target.value)}/> <br></br>
+      <Button margin="normal" type='submit' variant="contained">Sign In</Button>
       </form>
+      </Grid>
     </div>
   );
 }

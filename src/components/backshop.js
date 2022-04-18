@@ -1,6 +1,7 @@
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import React from "react"
 import UsersTable from './backshop_components/users';
+import ModulesTable from './backshop_components/modules';
 
 
 function Backshop() {
@@ -12,7 +13,7 @@ function Backshop() {
       <Routes>
         <Route path="/users/*" element={<UsersTable/>}/>
         
-        <Route path="/modules" element={<div>Modules</div>}/>
+        <Route path="/modules" element={<ModulesTable/>}/>
         <Route path="/crews" element={<div>Crews</div>}/>
       </Routes>
     </div>
