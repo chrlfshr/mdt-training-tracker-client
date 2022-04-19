@@ -1,10 +1,26 @@
-//import { Routes, Route, Link, useNavigate } from "react-router-dom";
-//import React, { useEffect, useState, useReducer, useContext, useRef } from 'react';
-import './App.css';
+import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from 'react';
+//import { DataGrid } from '@mui/x-data-grid';
+import { apiUrl } from '../App.js';
+import '../App.css';
 
-function Operator() {
+function Operator(props) {
+  const [modulesData, setModulesData] = useState([]);
+  const [tasksData, setTasksData] = useState([]);
+
+  useEffect(() => {
+    getModulesData()
+  }, [])
+
+  const getModulesData = async function(){
+    let data = await fetch(apiUrl + "/modules/")
+    let parsedData = await data.json()
+    setModulesData(parsedData)
+  }
+
   return (
     <div className="operator">
+      {console.log(props.user)}
     </div>
   );
 }

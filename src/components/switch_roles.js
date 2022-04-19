@@ -5,12 +5,12 @@ import { Select, MenuItem, FormControl } from '@mui/material';
 function Switch_Role({user, setCurrentRole, currentRole}) {
   return (
     <div className="sign_in">
-      <FormControl fullWidth='true' className="sign_in_form" style={{marginTop: 5 + 'px'}}>
+      <FormControl fullWidth={true} className="sign_in_form" style={{marginTop: 5 + 'px'}}>
       <Select
         name="input"
         labelId='Users'
         id='userSelect'
-        defaultValue={"operator"}
+        value={currentRole ?? "operator"}
         sx={{width: 500, fontSize: 35, fontWeight: 'bold'}}
         onChange={(e) => setCurrentRole(e.target.value)}>
         <MenuItem value={"operator"}>Operator</MenuItem>

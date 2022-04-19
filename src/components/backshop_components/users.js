@@ -1,17 +1,19 @@
-import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { apiUrl } from '../../App.js';
 import UsersProfile from "./userProfile.js";
+import CreateUser from "./createUser.js";
 
 function UsersTable() {
 
   const [usersData, setUsersData] = useState([]);
   const [currentUserData, setCurrentUserData] = useState({});
+  const [submitted, setSubmitted] = useState(1);
 
   useEffect(() => {
     getUsersData()
-  },[])
+  },[submitted])
 
   const getUsersData = async function(){
     let data = await fetch(apiUrl + "/users/")
@@ -28,14 +30,16 @@ function UsersTable() {
     { field: 'is_approver', headerName: 'Approval Authority', width: 150},
     { field: 'edit', headerName: 'Edit', width: 70, renderCell: (params) => {
       return (<Link to={`${params.row.username}`} 
-      onClick={()=>{setCurrentUserData(usersData[params.row.tableID - 1])}}>Edit</Link>)}
+      onClick={()=> {setCurrentUserData(usersData[params.row.tableID - 1])
+      console.log('onClickEntered')}}>Edit</Link>)}
     }
   ];
 
   return (
-      <div className="auth" style={{ height: '20em', width: '56em', margin: "10em"}}>
+      <div className="auth" style={{ height: '23.22em', width: '56em', margin: "10em"}}>
         <Routes>
-          <Route path="/:username" element={<UsersProfile userData={currentUserData}/>}/>
+          <Route path="/:username" element={<UsersProfile userData={currentUserData} setSubmitted={setSubmitted}/>}/>
+          <Route path="/createNewUser" element={<CreateUser setSubmitted={setSubmitted}/>}/>
         </Routes>
         <DataGrid
           rows={usersData.map((user, i) =>{
@@ -45,6 +49,7 @@ function UsersTable() {
           pageSize={5}
           rowsPerPageOptions={[5]}
         />
+        <Link to="createNewUser">Create New User</Link>
       </div>
   );
   
