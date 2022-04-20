@@ -103,11 +103,12 @@ function CreateUser({setSubmitted}) {
           onChange={(e) => setNewUserData({...newUserData, rank: e.target.value})}/>
 
           <TextField margin="normal" label="Name" variant="outlined" 
-          onChange={(e) => setNewUserData({...newUserData, name: e.target.value})}/>
+          onChange={(e) => setNewUserData({...newUserData, name: e.target.value})}/> <br></br>
            <FormControl>
           {/* <InputLabel id="crew-label">Crew</InputLabel> */}
           <Select
           labelId='crew-label'
+          style={{margin: 10}}
           name="input"
           label="Crew"
           id='crew'
@@ -118,7 +119,7 @@ function CreateUser({setSubmitted}) {
           {crewData.map((crew, i) => {return (<MenuItem key={i} value={crew.id}>{crew.name}</MenuItem>)})}
         
           </Select>
-          </FormControl>
+          </FormControl> <br></br>
 
           <FormControlLabel label="Trainer" 
           control={<Checkbox checked={newUserData.is_trainer} 
@@ -131,6 +132,8 @@ function CreateUser({setSubmitted}) {
           <FormControlLabel label="Approval Authority" 
           control={<Checkbox checked={newUserData.is_approver} 
           onChange={(e) => setNewUserData({...newUserData, is_approver: e.target.checked})}/> }/>
+
+          <br></br>
 
           {moduleData.length !== 0 && moduleData.map((module, i)=>{
             if(module.is_approved){
@@ -145,6 +148,7 @@ function CreateUser({setSubmitted}) {
                 }/>} label={module.name}/>)
             }
           })}
+          <br></br>
           <Button variant="contained" onClick={postUserData}>Submit</Button>
       </Box>
     </div>

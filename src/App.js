@@ -28,9 +28,11 @@ function App() {
   
   useEffect(()=>{
     if (currentUser.id !== undefined) {
-      setCurrentUser(location.pathname.match(/\/(.*?)\//gm)[0].slice(1,-1));
+      const user = location.pathname.match(/\/(.*?)\//y)[0].slice(1,-1);
+      console.log(user);
+      setCurrentUser(user);
     }
-  },[])
+  }, [])
 
   useEffect(()=>{
     if(currentUser.id !== undefined){

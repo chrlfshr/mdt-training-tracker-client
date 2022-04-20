@@ -5,22 +5,21 @@ import { apiUrl } from '../App.js';
 import '../App.css';
 
 function Operator(props) {
-  const [modulesData, setModulesData] = useState([]);
-  const [tasksData, setTasksData] = useState([]);
+  const [overviewData, setOverviewData] = useState([]);
 
   useEffect(() => {
-    getModulesData()
+    //getOverviewData()
   }, [])
 
-  const getModulesData = async function(){
+  const getOverviewData = async function(){
     let data = await fetch(apiUrl + "/modules/")
     let parsedData = await data.json()
-    setModulesData(parsedData)
+    setOverviewData(parsedData)
   }
 
   return (
     <div className="operator">
-      {console.log(props.user)}
+      
     </div>
   );
 }

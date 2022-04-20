@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Button, TextField, Grid} from '@mui/material';
-import {apiUrl} from '../App.js';
+import { apiUrl } from '../App.js';
 
 function Sign_In({setUser}) {
   const [username, setUsername] = useState('')
@@ -18,7 +18,7 @@ function Sign_In({setUser}) {
   return (
     <div className="sign_in">
       <Grid alignItems='center' justify='center' marginTop="20em">
-     <form onSubmit={fetchUserData}>
+      <form onSubmit={fetchUserData}>
       <TextField margin="normal" type="username" variant="outlined" label="User Name" 
                  onChange={(e) => setUsername(e.target.value)}/> <br></br>
       <Button margin="normal" type='submit' variant="contained">Sign In</Button>
