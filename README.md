@@ -17,9 +17,10 @@
   * Back-shop
     * Manage Users
       * Create User
-     * Manage Modules
+    * Manage Modules
       * Create Module
-      * Manage Crews
+    * Manage Crews
+      * Create Crew
 * Approval Authority
 
 

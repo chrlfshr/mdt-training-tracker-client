@@ -5,30 +5,40 @@ import { apiUrl } from '../../App.js';
 import { Button, TextField, Box} from "@mui/material";
 import CrewsTable from './crews.js';
 
-function CreateCrew({crewData}) {
+function CreateCrew({setSubmitted}) {
   const [updatedCrewData, setUpdatedCrewData] = useState([]);
-
+  const navigate = useNavigate() 
 
   useEffect(() => {
-    setUpdatedCrewData(crewData)
-  },[])
+    console.log(updatedCrewData)
+  },[updatedCrewData])
 
-  const patchCrewData = function(){
-    fetch(apiUrl + '/crews' + crewData.id)
-    console.log(crewData.id);
-  }
+  const postCrewData = function(){
+    console.log(updatedCrewData)
+    fetch(apiUrl + '/crews', {
+      method: 'POST',
+      body: JSON.stringify(updatedCrewData),
+      headers: {
+        'Content-type': 'application/json'
+      }
+    })
+    .then((data) => {
+      console.log(data)
+      setSubmitted(updatedCrewData)
+      navigate(-1)
+    })
+    .catch((err) => console.log(err));
+  };
 
   return (
         <Box component="form" sx={{'& .MuiTextField-root': { m: 1, width: '30ch' },}} noValidate autoComplete="off">
-          <TextField margin="normal" label="Crew ID" variant="outlined"
-            onChange={(e) => setUpdatedCrewData({...crewData, id: e.target.value})}/>
 
           <TextField margin="normal" label="Crew Name" variant="outlined" 
-          onChange={(e) => setUpdatedCrewData({...crewData, name: e.target.value})}/>
+          onChange={(e) => setUpdatedCrewData({name: e.target.value})}/>
 
           <br></br>
 
-          <Button type="submit" margin ="normal" variant="contained">Add</Button>
+          <Button onClick={postCrewData} margin ="normal" variant="contained">Add</Button>
         </Box>
   );
 }

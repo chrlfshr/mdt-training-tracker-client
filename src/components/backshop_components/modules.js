@@ -3,15 +3,20 @@ import { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { apiUrl } from '../../App.js';
 import ModuleProfile from "./moduleProfile.js";
+import NewModule from "./newModule.js";
 
 function ModulesTable() {
   const [moduleData, setModuleData] = useState([]);
   const [currentModuleData, setCurrentModuleData] = useState([]);
+  const [submitted, setSubmitted] = useState(1);
 
   useEffect(() => {
     getModuleData()
   },[])
 
+  useEffect(() => {
+    getModuleData()
+  },[submitted])
 
   const getModuleData = async function(){
     let data = await fetch(apiUrl + "/modules/")
@@ -34,7 +39,8 @@ function ModulesTable() {
   return (
       <div className="auth" style={{ height: '20em', width: '35em', margin: "10em"}}>
         <Routes>
-          <Route path="/:module" element={<ModuleProfile module={currentModuleData}/>}/>
+          <Route path="/:module" element={<ModuleProfile module={currentModuleData} setSubmitted={setSubmitted}/>}/>
+          <Route path="/createNewModule" element={<NewModule setSubmitted={setSubmitted}/>}/>
         </Routes>
         <DataGrid
           rows={moduleData.map((module, i) =>{
@@ -44,6 +50,7 @@ function ModulesTable() {
           pageSize={4}
           rowsPerPageOptions={[4]}
         />
+        <Link to="createNewModule">Create New Module</Link>
       </div>
   );
   

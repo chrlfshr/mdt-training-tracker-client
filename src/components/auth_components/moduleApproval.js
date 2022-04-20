@@ -3,11 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { DataGrid, GridToolbarContainer } from '@mui/x-data-grid';
 
 import { apiUrl } from '../../App.js'
-import { Box, TextField, Button } from "@mui/material";
+import { Box, TextField, Button, Checkbox, FormControlLabel } from "@mui/material";
 
 
 
-function ModuleProfile({module, setSubmitted}) {
+function ModuleApproval({module, setSubmitted}) {
+
+  console.log(module)
   const navigate = useNavigate() 
   const [currentModuleData, setCurrentModuleData] = useState([]);
   const [updatedModuleData, setUpdatedModuleData] = useState([]);
@@ -24,9 +26,6 @@ function ModuleProfile({module, setSubmitted}) {
   useEffect(() =>{
     setUpdatedTaskData(taskData)
   },[taskData])
-
-
-
 
   function AddTaskToolbar(){
 
@@ -200,13 +199,16 @@ function ModuleProfile({module, setSubmitted}) {
     
   return (
         <Box component="form" sx={{'& .MuiTextField-root': { m: 1, width: '30ch' },}}noValidate autoComplete="off">
-          <TextField margin="normal" label="Module Name" variant="outlined" value={updatedModuleData.name} 
-            onChange={(e) => setUpdatedModuleData({...updatedModuleData, name: e.target.value})}/>
+          <TextField margin="normal" label="Module Name" variant="outlined" value={updatedModuleData.name}/>
 
-          <TextField margin="normal" label="Operator Level" variant="outlined" value={updatedModuleData.operator_level} 
-          onChange={(e) => setUpdatedModuleData({...updatedModuleData, operator_level: e.target.value})}/>
+          <TextField margin="normal" label="Operator Level" variant="outlined" value={updatedModuleData.operator_level}/>
 
           <TextField margin="normal" label="Approved" variant="outlined" value={`${updatedModuleData.is_approved}`}/>
+
+          <FormControlLabel label="Approved" 
+          control={<Checkbox checked={updatedModuleData.is_approved} 
+          onChange={(e) => setUpdatedModuleData({...updatedModuleData, is_approved : e.target.checked})}/>} />
+
           <div className="auth" style={{height: '23em', width: '75em', margin: "5em"}}>
             <DataGrid
               rows={updatedTaskData.map((task, i) =>{
@@ -230,4 +232,4 @@ function ModuleProfile({module, setSubmitted}) {
   );
 }
 
-export default ModuleProfile;
+export default ModuleApproval;
