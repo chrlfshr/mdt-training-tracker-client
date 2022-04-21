@@ -1,6 +1,7 @@
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
+import { Grid } from '@mui/material'
 import { apiUrl } from '../../App.js';
 import { Button, TextField } from "@mui/material";
 import CreateCrew from './createCrew.js';
@@ -75,11 +76,22 @@ function CrewsTable() {
   ];
 
   return (
-      <div className="auth" style={{ height: '30em', width: '50em', margin: "10em"}}>
+    <Grid
+      container
+      spacing={1}
+      flexGrow
+      direction="column"
+      alignItems="center"
+      justify="center"
+      style={{ minHeight: '100vh' }}
+    >
+      <Grid item xs={10}>
         <Routes>
           <Route path="/createNewCrew" element={<CreateCrew setSubmitted={setSubmitted}/>}/>
         </Routes>
-        <DataGrid
+      </Grid>
+      <Grid item xs={10}>
+        <DataGrid xs={{ height: '30em', width: '50em', margin: "10em"}}
           rows={crewData.map((crew, i) =>{
             return({...crew, tableID: i + 1})
           })}
@@ -89,7 +101,8 @@ function CrewsTable() {
           rowsPerPageOption={[6]}
         />
         <Link to="createNewCrew">Create New Crew</Link>
-      </div>
+      </Grid>
+    </Grid>
   );
 }
 export default CrewsTable;
