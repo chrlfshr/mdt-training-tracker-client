@@ -1,8 +1,17 @@
 import { Select, MenuItem, FormControl } from '@mui/material';
-
+import { useEffect, useState } from 'react';
+import { useLocation } from "react-router-dom";
 
 
 function Switch_Role({user, setCurrentRole, currentRole}) {
+  const location = useLocation();
+  
+  useEffect(()=>{
+    setCurrentRole("operator")
+    // console.log(location.pathname.match(/\/(.*?)\/(.*)/)[2])
+    // setCurrentRole(location.pathname.match(/\/(.*?)\/(.*)/)[2])
+  },[])
+
   return (
     <div className="sign_in">
       <FormControl fullWidth={true} className="sign_in_form" style={{marginTop: 5 + 'px'}}>

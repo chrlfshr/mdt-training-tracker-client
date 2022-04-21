@@ -136,8 +136,6 @@ function UsersProfile({userData, setSubmitted}) {
     })
   }
 
-  
-
   const getChecked = function(module){
     for(let x = 0; x < updatedUserModuleData.length; x++){
       if(module.id === updatedUserModuleData[x].module_id){

@@ -43,9 +43,9 @@
   },
   "devDependencies": {
     "@testing-library/cypress": "^8.0.2",
+    "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.0.1",
     "@testing-library/user-event": "^13.5.0",
-    "@testing-library/jest-dom": "^5.16.4",
     "cypress": "^9.5.4"
   }
 }

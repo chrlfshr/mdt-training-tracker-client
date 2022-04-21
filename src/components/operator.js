@@ -37,12 +37,39 @@ function Operator(props) {
     setOverviewData(parsedData);
   }
 
-  const toggleIsStarted = () => {
-
+  const toggleIsStarted = async (mod) => {
+    await fetch(apiUrl + `/users/${mod.user_id}/modules/${mod.module_id}`, {
+        method: 'PATCH',
+        body: JSON.stringify({is_started: !mod.is_started}),
+        headers: {
+          'Content-type': 'application/json'
+        }
+      })
+    getOverviewData();
   }
 
-  const toggleIsCompleted = () => {
+  const toggleIsCompleted = async (mod) => {
+    await fetch(apiUrl + `/users/${mod.user_id}/modules/${mod.module_id}`, {
+      method: 'PATCH',
+      body: JSON.stringify({is_completed: !mod.is_completed}),
+      headers: {
+        'Content-type': 'application/json'
+      }
+    })
+    getOverviewData();
+  }
 
+  const getTaskData = function(mod){
+    fetch(apiUrl + "/tasks/")
+      .then(data => data.json())
+      .then(tasks => {
+        const taskList = [];
+        tasks.forEach(task => {
+          if (task.module_id === mod.module_id) {
+            taskList.push(task);
+          }
+        })
+      })
   }
 
   return (
@@ -99,35 +126,39 @@ function Operator(props) {
           <Typography variant="h4">
             Your Training
           </Typography>
-          {overviewData?.modules && overviewData?.modules.map((mod, i) => (
-            <Accordion key={i}>
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-              >
-                <Typography sx={{ width: '33%', flexShrink: 0 }}>{mod.name}</Typography>
-                <Typography sx={{ color: 'text.secondary' }}>
-                  Deadline: {mod.deadline}
-                </Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <FormGroup>
-                  <FormControlLabel
-                    control={
-                      <Checkbox checked={mod.is_started} onChange={toggleIsStarted} name="started" />
-                    }
-                    label="Module Started"
-                  />
-                  <FormControlLabel
-                    control={
-                      <Checkbox checked={mod.is_completed} onChange={toggleIsCompleted} name="complete" />
-                    }
-                    label="Module Complete"
-                  />
-                </FormGroup>
-                <FormHelperText>Mark Your Training Progress</FormHelperText>
-              </AccordionDetails>
-            </Accordion>
-          ))}
+          {overviewData?.modules && overviewData?.modules.map((mod, i) => {
+            getTaskData(mod)
+
+            return (
+              <Accordion key={i}>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                >
+                  <Typography sx={{ width: '33%', flexShrink: 0 }}>{mod.name}</Typography>
+                  <Typography sx={{ color: 'text.secondary' }}>
+                    Deadline: {mod.deadline}
+                  </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <FormGroup>
+                    <FormControlLabel
+                      control={
+                        <Checkbox checked={mod.is_started} onChange={() => toggleIsStarted(mod)} name="started" />
+                      }
+                      label="Module Started"
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox checked={mod.is_completed} onChange={() => toggleIsCompleted(mod)} name="complete" />
+                      }
+                      label="Module Complete"
+                    />
+                  </FormGroup>
+                  <FormHelperText>Mark Your Training Progress</FormHelperText>
+                </AccordionDetails>
+              </Accordion>
+            )}
+          )}
         </Grid>
       </Grid>
     </div>

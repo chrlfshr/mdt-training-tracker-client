@@ -17,9 +17,9 @@ function App() {
 
   const [currentUser, setCurrentUser] = useState({
     id: undefined,
-    username: "bob",
-    rank: '1Lt',
-    name: 'bob',
+    username: "harold.hutchins.1",
+    rank: 'Master Sergeant',
+    name: 'Harold H. Hutchins',
     is_trainer: 1,
     is_auth: 1,
     is_approver: 1

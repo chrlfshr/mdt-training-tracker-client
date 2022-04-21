@@ -1,6 +1,6 @@
 import { Routes, Route, Link, useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from 'react';
-import { Typography } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 
 //import { DataGrid } from '@mui/x-data-grid';
@@ -62,25 +62,37 @@ function Trainer(props) {
   ];
 
   return (
-    <div className="trainer">
-      <Typography variant="overline">
-        Crew ID: {crewData.id} <br></br>
-        Crew Name: {crewData.name} <br></br>
-      </Typography>
-      <div className="auth" style={{ height: '23.22em', width: '56em', margin: "10em"}}>
-      <Routes>
-          <Route path="/:username" element={<MemberProfile userData={currentMemberData} setSubmitted={setSubmitted}/>}/>
-        </Routes>
-        <DataGrid
-          rows={crewMembers.map((user, i) =>{
-            return({...user, tableID: i + 1})
-          })}
-          columns={columns}
-          pageSize={5}
-          rowsPerPageOptions={[5]}
-        />
-        </div>
-    </div>
+    <Grid
+        container
+        spacing={1}
+        flexGrow
+        direction="column"
+        alignItems="center"
+        justify="center"
+        style={{ minHeight: '100vh' }}
+      >
+        <Grid item xs={10}>
+          <Typography variant="overline">
+            Crew ID: {crewData.id} <br></br>
+            Crew Name: {crewData.name} <br></br>
+          </Typography>
+        </Grid>
+        <Grid item xs={10}>
+          <Routes>
+            <Route path="/:username" element={<MemberProfile userData={currentMemberData} setSubmitted={setSubmitted}/>}/>
+          </Routes>
+        </Grid>
+        <Grid item xs={10}>
+          <DataGrid sx={{ height: '20em', width: '40em', margin: "10em"}}
+            rows={crewMembers.map((user, i) =>{
+              return({...user, tableID: i + 1})
+            })}
+            columns={columns}
+            pageSize={5}
+            rowsPerPageOptions={[5]}
+          />
+        </Grid>
+      </Grid>
   )
 };
 
