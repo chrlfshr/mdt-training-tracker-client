@@ -151,7 +151,6 @@ function UsersProfile({userData, setSubmitted}) {
     <div className="auth" style={{ height: '20em', width: '56em', margin: "10em"}}>
      
         <Box component="form" sx={{'& .MuiTextField-root': { m: 1, width: '30ch' },}}noValidate autoComplete="off">
-        <form>
           <TextField margin="normal" label="Username" variant="outlined" value={updatedUserData.username} 
             onChange={(e) => setUpdatedUserData({...updatedUserData, username: e.target.value})}/>
 
@@ -203,7 +202,6 @@ function UsersProfile({userData, setSubmitted}) {
           })}
           <Button variant="contained" onClick={patchUserData}>Update</Button>
           <Button variant="contained" onClick={deleteUserData}>Delete</Button>
-        </form>
       </Box>
     </div>
   );

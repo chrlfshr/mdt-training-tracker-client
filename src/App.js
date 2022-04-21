@@ -57,11 +57,11 @@ function App() {
           </header>
           <main>
             <Routes>
-              <Route path="/training" element={<div>training</div>}/>
-              <Route path="/operator" element={<Operator user={currentUser}/>}/>
-              <Route path="/trainer" element={<Trainer/>}/>
+              <Route path="/training/*" element={<div>training</div>}/>
+              <Route path="/operator/*" element={<Operator user={currentUser}/>}/>
+              <Route path="/trainer/*" element={<Trainer/>}/>
               <Route path="/backshop/*" element={<Backshop/>}/>
-              <Route path="/auth" element={<Auth/>}/>
+              <Route path="/auth/*" element={<Auth/>}/>
             </Routes>
           </main>
           </>}>

@@ -28,9 +28,9 @@ function Auth() {
 
   const columns =[
     { field: 'name', headerName: 'Module Name', width: 130},
-    { field: 'operator_level', headerName: 'Operator_Level', width: 150},
-    { field: 'is_approved', headerName: 'isApproved', width: 130},
-    { field: 'edit', headerName: 'Edit', width: 70, renderCell: (params) => {
+    { field: 'operator_level', headerName: 'Operator Level', width: 150},
+    { field: 'is_approved', headerName: 'Approved', width: 130},
+    { field: 'examine', headerName: 'Examine', width: 70, renderCell: (params) => {
       return (<Link to={`${params.row.tableID}`} onClick={()=>{
         setCurrentModuleData(moduleData[params.row.tableID - 1])}}>Examine</Link>)
       }
@@ -40,7 +40,7 @@ function Auth() {
   return (
       <div className="auth" style={{ height: '20em', width: '35em', margin: "10em"}}>
         <Routes>
-          <Route path="/:module" element={<ModuleApproval module={currentModuleData} setSubmitted={setSubmitted}/>}/>
+          <Route path="/:id" element={<ModuleApproval module={currentModuleData} setSubmitted={setSubmitted}/>}/>
         </Routes>
         <DataGrid
           rows={moduleData.map((module, i) =>{
