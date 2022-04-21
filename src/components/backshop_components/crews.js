@@ -76,33 +76,23 @@ function CrewsTable() {
   ];
 
   return (
-    <Grid
-      container
-      spacing={1}
-      flexGrow
-      direction="column"
-      alignItems="center"
-      justify="center"
-      style={{ minHeight: '100vh' }}
-    >
-      <Grid item xs={10}>
-        <Routes>
-          <Route path="/createNewCrew" element={<CreateCrew setSubmitted={setSubmitted}/>}/>
-        </Routes>
-      </Grid>
-      <Grid item xs={10}>
-        <DataGrid xs={{ height: '30em', width: '50em', margin: "10em"}}
-          rows={crewData.map((crew, i) =>{
-            return({...crew, tableID: i + 1})
-          })}
-          columns={columns}
-          onCellEditCommit={handleCellEdit}
-          pageSize={6}
-          rowsPerPageOption={[6]}
+    <div>
+      <Routes>
+        <Route path="/createNewCrew" element={<CreateCrew setSubmitted={setSubmitted}/>}/>
+      </Routes>
+      <div style={{ height: '30em', width: '60em', margin: "10em"}}>
+        <DataGrid 
+            rows={crewData.map((crew, i) =>{
+              return({...crew, tableID: i + 1})
+            })}
+            columns={columns}
+            onCellEditCommit={handleCellEdit}
+            pageSize={6}
+            rowsPerPageOption={[6]}
         />
-        <Link to="createNewCrew">Create New Crew</Link>
-      </Grid>
-    </Grid>
+      </div>
+      <Link to="createNewCrew">Create New Crew</Link>
+    </div>
   );
 }
 export default CrewsTable;

@@ -24,7 +24,6 @@ function ModulesTable() {
   const getModuleData = async function(){
     let data = await fetch(apiUrl + "/modules/")
     let parsedData = await data.json()
-    console.log(parsedData)
     setModuleData(parsedData)
   }
 

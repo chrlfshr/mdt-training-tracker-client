@@ -19,7 +19,6 @@ function Trainer(props) {
   const [submitted, setSubmitted] = useState(1);
 
   useEffect(() => {
-    console.log(user)
     getUserData()
   }, [submitted])
 
@@ -40,14 +39,12 @@ function Trainer(props) {
     let data = await fetch(apiUrl + `/crews/${userData?.crew_id}`)
     let parsedData = await data.json()
     setCrewData(parsedData);
-    console.log(parsedData)
   }
 
   const getCrewMembersData = async function(){
     let data = await fetch(apiUrl + `/crews/${userData?.crew_id}/members`)
     let parsedData = await data.json()
     setCrewMembers(parsedData);
-    console.log(parsedData)
   }
 
   const columns =[
@@ -57,7 +54,7 @@ function Trainer(props) {
     { field: 'examine', headerName: 'Examine', width: 70, renderCell: (params) => {
       return (<Link to={`${params.row.username}`} 
       onClick={()=> {currentMemberData(crewMembers[params.row.tableID - 1])
-      console.log('onClickEntered')}}>Examine</Link>)}
+      }}>Examine</Link>)}
     }
   ];
 

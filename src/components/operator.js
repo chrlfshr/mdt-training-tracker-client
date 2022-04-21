@@ -74,8 +74,6 @@ function Operator(props) {
 
   return (
     <div className="operator">
-      {console.log(overviewData)}
-
       <Grid
         container
         spacing={1}
