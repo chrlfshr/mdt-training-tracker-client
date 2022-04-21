@@ -12,8 +12,3 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
-
-.auth {
-  align-items: center;
-  justify-content: center;
-}

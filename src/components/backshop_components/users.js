@@ -1,6 +1,9 @@
 import { Routes, Route, Link } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
+import { Grid } from '@mui/material'
+import ApprovedIcon from '@mui/icons-material/ThumbUp';
+import DisapprovedIcon from '@mui/icons-material/ThumbDown';
 import { apiUrl } from '../../App.js';
 import UsersProfile from "./userProfile.js";
 import CreateUser from "./createUser.js";
@@ -25,9 +28,18 @@ function UsersTable() {
     { field: 'username', headerName: 'Username', width: 130},
     { field: 'rank', headerName: 'Rank', width: 130},
     { field: 'name', headerName: 'Name', width: 150},
-    { field: 'is_trainer', headerName: 'Trainer', width: 130},
-    { field: 'is_auth', headerName: 'Admin', width: 130},
-    { field: 'is_approver', headerName: 'Approval Authority', width: 150},
+    { field: 'is_trainer', headerName: 'Trainer', width: 130, renderCell: (params) => {
+      return (params.row.is_trainer ? <ApprovedIcon /> : <DisapprovedIcon />)
+      }
+    },
+    { field: 'is_auth', headerName: 'Admin', width: 130, renderCell: (params) => {
+      return (params.row.is_auth ? <ApprovedIcon /> : <DisapprovedIcon />)
+      }
+    },
+    { field: 'is_approver', headerName: 'Approval Authority', width: 150, renderCell: (params) => {
+      return (params.row.is_approver ? <ApprovedIcon /> : <DisapprovedIcon />)
+      }
+    },
     { field: 'edit', headerName: 'Edit', width: 70, renderCell: (params) => {
       return (<Link to={`${params.row.username}`} 
       onClick={()=> {setCurrentUserData(usersData[params.row.tableID - 1])
@@ -36,23 +48,34 @@ function UsersTable() {
   ];
 
   return (
-      <div className="auth" style={{ height: '23.22em', width: '56em', margin: "10em"}}>
+    <Grid
+      container
+      spacing={1}
+      flexGrow
+      direction="column"
+      alignItems="center"
+      justify="center"
+      style={{ minHeight: '100vh' }}
+    >
+      <Grid item xs={10}>
         <Routes>
           <Route path="/:username" element={<UsersProfile userData={currentUserData} setSubmitted={setSubmitted}/>}/>
           <Route path="/createNewUser" element={<CreateUser setSubmitted={setSubmitted}/>}/>
         </Routes>
-        <DataGrid
-          rows={usersData.map((user, i) =>{
-            return({...user, tableID: i + 1})
-          })}
-          columns={columns}
-          pageSize={5}
-          rowsPerPageOptions={[5]}
+      </Grid>
+      <Grid item xs={10}>
+        <DataGrid sx={{ height: '27em', width: '65em', margin: "10em"}}
+            rows={usersData.map((user, i) =>{
+              return({...user, tableID: i + 1})
+            })}
+            columns={columns}
+            pageSize={5}
+            rowsPerPageOptions={[5]}
         />
         <Link to="createNewUser">Create New User</Link>
-      </div>
+      </Grid>
+    </Grid>
   );
-  
 }
 
 export default UsersTable;

@@ -2,9 +2,10 @@ import { Routes, Route, Link } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { Grid } from '@mui/material'
+import ApprovedIcon from '@mui/icons-material/ThumbUp';
+import DisapprovedIcon from '@mui/icons-material/ThumbDown';
 import { apiUrl } from '../App.js';
 import ModuleApproval from "./auth_components/moduleApproval.js";
-
 
 
 function Auth() {
@@ -30,7 +31,10 @@ function Auth() {
   const columns =[
     { field: 'name', headerName: 'Module Name', width: 130},
     { field: 'operator_level', headerName: 'Operator Level', width: 150},
-    { field: 'is_approved', headerName: 'Approved', width: 130},
+    { field: 'is_approved', headerName: 'Approved', width: 130, renderCell: (params) => {
+        return (params.row.is_approved ? <ApprovedIcon /> : <DisapprovedIcon />)
+      }
+    },
     { field: 'examine', headerName: 'Examine', width: 70, renderCell: (params) => {
       return (<Link to={`${params.row.tableID}`} onClick={()=>{
         setCurrentModuleData(moduleData[params.row.tableID - 1])}}>Examine</Link>)
@@ -54,7 +58,7 @@ function Auth() {
           </Routes>
         </Grid>
         <Grid item xs={10}>
-          <DataGrid sx={{ height: '20em', width: '35em', margin: "10em"}}
+          <DataGrid sx={{ height: '25em', width: '35em', margin: "10em"}}
             rows={moduleData.map((module, i) =>{
               return({...module, tableID: i + 1})
             })}

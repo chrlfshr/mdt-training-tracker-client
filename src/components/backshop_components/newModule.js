@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { DataGrid, GridToolbarContainer } from '@mui/x-data-grid';
 
 import { apiUrl } from '../../App.js'
-import { Box, TextField, Button } from "@mui/material";
+import { Box, TextField, Button, Grid } from "@mui/material";
 
 
 function NewModule({setSubmitted}) {
@@ -111,13 +111,24 @@ function NewModule({setSubmitted}) {
     ];
 
   return (
-        <Box component="form" sx={{'& .MuiTextField-root': { m: 1, width: '30ch' },}}  noValidate autoComplete="off">
+    <Grid
+        container
+        spacing={1}
+        flexGrow
+        direction="column"
+        alignItems="center"
+        justify="center"
+        style={{ minHeight: '100vh' }}
+      >
           <TextField margin="normal" label="Module Name" variant="outlined" value={newModuleData.name} 
             onChange={(e) => setNewModuleData({...newModuleData, name: e.target.value})}/>
 
           <TextField margin="normal" label="Operator Level" variant="outlined" value={newModuleData.operator_level} 
           onChange={(e) => setNewModuleData({...newModuleData, operator_level: e.target.value})}/>
 
+          <br></br>
+
+      <Grid item>
           <div className="auth" style={{height: '23em', width: '75em', margin: "5em"}}>
             <DataGrid
               rows={newTaskData.map((task, i) =>{
@@ -136,7 +147,8 @@ function NewModule({setSubmitted}) {
             />
           </div>
           <Button variant="contained" onClick={postModule}>Create Module</Button>
-       </Box>
+       </Grid>
+       </Grid>
   );
 }
 

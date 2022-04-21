@@ -1,6 +1,7 @@
 import { Routes, Route, Link } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
+import { Grid } from '@mui/material';
 import { apiUrl } from '../../App.js';
 import ModuleProfile from "./moduleProfile.js";
 import NewModule from "./newModule.js";
@@ -37,7 +38,15 @@ function ModulesTable() {
   ];
 
   return (
-      <div className="auth" style={{ height: '20em', width: '35em', margin: "10em"}}>
+        <Grid
+        container
+        spacing={1}
+        flexGrow
+        direction="column"
+        alignItems="center"
+        justify="center"
+        style={{height: '30em', width: '100%'}}
+      >
         <Routes>
           <Route path="/:module" element={<ModuleProfile module={currentModuleData} setSubmitted={setSubmitted}/>}/>
           <Route path="/createNewModule" element={<NewModule setSubmitted={setSubmitted}/>}/>
@@ -51,7 +60,7 @@ function ModulesTable() {
           rowsPerPageOptions={[4]}
         />
         <Link to="createNewModule">Create New Module</Link>
-      </div>
+        </Grid>
   );
   
 }
